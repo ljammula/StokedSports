@@ -114,8 +114,11 @@
         content you can do so by calling 
         await Shell.Current.GoToAsync("//LoginPage");
     -->
+    <!-- <TabBar> -->
+    <!--     <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:DefaultLoginPage}" /> -->
+    <!-- </TabBar> -->
     <TabBar>
-        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:DefaultLoginPage}" />
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:SimpleLoginPage}" />
     </TabBar>
 
 

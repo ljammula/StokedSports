@@ -23,8 +23,9 @@ namespace StokedSports.Mobile.Core
         private async void OnLoginClicked(object sender, EventArgs e)
         {
             FlyoutIsPresented = false;
-            await DisplayAlert("Login", "Welcome back!", "Ok");
-            await Shell.Current.GoToAsync("//About");
+            // await DisplayAlert("Login", "Welcome back!", "Ok");
+            // await Shell.Current.GoToAsync("//About");
+            await Shell.Current.GoToAsync("//LoginPage");
         }
     }
 }
