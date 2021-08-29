@@ -5,12 +5,12 @@ using Xamarin.Forms.Xaml;
 namespace StokedSports.Mobile.Core.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class DefaultLoginPage : ContentPage
     {
-        public LoginPage()
+        public DefaultLoginPage()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
+            this.BindingContext = new DefaultLoginViewModel();
         }
     }
 }

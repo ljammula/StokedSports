@@ -3,11 +3,11 @@ using Xamarin.Forms;
 
 namespace StokedSports.Mobile.Core.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class DefaultLoginViewModel : BaseViewModel
     {
         public Command LoginCommand { get; }
 
-        public LoginViewModel()
+        public DefaultLoginViewModel()
         {
             LoginCommand = new Command(OnLoginClicked);
         }
