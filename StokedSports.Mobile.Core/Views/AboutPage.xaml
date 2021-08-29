@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StokedSports.Mobile.Core.Views.AboutPage"
+             xmlns:viewModels="clr-namespace:StokedSports.Mobile.Core.ViewModels;assembly=StokedSports.Mobile.Core"
+             Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <viewModels:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+            <Color x:Key="AntiqueWhite">#fffaeb</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackLayout BackgroundColor="{StaticResource AntiqueWhite}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                    <Image Source="stoked_sports_logo.png" VerticalOptions="Center" HeightRequest="64" />
+                </ContentView>
+            </StackLayout>
+        </StackLayout>
+        <ScrollView Grid.Row="1">
+            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Label Text="Welcome to Stoked Sports!" FontSize="Title"/>
+                <Label Text="You can view and participate ongoing sporting events in your area with our App. Give it a try!" FontSize="16" Padding="0,0,0,0"/>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StokedSports.Mobile.Core.App">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BackGroundColor">#f2b3b3</Color>
+            <Color x:Key="FlyoutBackGroundColor">#f2b3b3</Color>
+            <Color x:Key="NavigationPrimary">#901c1c</Color>
+            <Color x:Key="FlyoutHeaderBackGroundColor">#4f1f1d</Color>
+
+            <Style x:Key="ListItemTextStyle" TargetType="{x:Type Label}">
+                <Setter Property = "LineBreakMode" Value="NoWrap"/>
+                <Setter Property = "FontSize" Value="Large"/>
+            </Style>
+            <Style x:Key="ListItemDetailTextStyle" TargetType="{x:Type Label}">
+                <Setter Property = "FontSize" Value="13"/>
+            </Style>
+            <Style x:Key="ListViewStyle" TargetType="ListView">
+                <Setter Property = "BackgroundColor" Value="{StaticResource BackGroundColor}"/>
+                <Setter Property = "VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property = "HasUnevenRows" Value="True"/>
+                <Setter Property = "SeparatorVisibility" Value="None"/>
+                <Setter Property = "IsPullToRefreshEnabled" Value="True"/>
+            </Style>
+            <Style x:Key="labelDataStyle" TargetType="Label">
+                <Setter Property = "TextColor" Value="Black" />
+                <Setter Property = "FontSize"  Value="Medium" />
+                <Setter Property = "Margin"  Value="0,-4, 0, 10" />
+            </Style>
+        </ResourceDictionary>     
+    </Application.Resources>
+</Application>
