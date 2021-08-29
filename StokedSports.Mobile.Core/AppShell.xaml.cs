@@ -27,5 +27,13 @@ namespace StokedSports.Mobile.Core
             // await Shell.Current.GoToAsync("//About");
             await Shell.Current.GoToAsync("//LoginPage");
         }
+
+        private async void OnSignUpClicked(object sender, EventArgs e)
+        {
+            FlyoutIsPresented = false;
+            // await DisplayAlert("Login", "Welcome back!", "Ok");
+            // await Shell.Current.GoToAsync("//About");
+            await Shell.Current.GoToAsync("//SignUpPage");
+        }
     }
 }
