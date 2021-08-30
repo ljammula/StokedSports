@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StokedSports.Mobile.Core.Views.LocationsPage">
+             x:Class="StokedSports.Mobile.Core.Views.LocationsPage" Title="Locations">
     <ContentPage.Content>
         <StackLayout BackgroundColor="Aquamarine">
+            <!-- Description-->
             <Label Text="Welcome to Locations Page!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" FontSize="Title"/>
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand" FontSize="Title"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

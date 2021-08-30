@@ -12,7 +12,8 @@
     xmlns:local="clr-namespace:StokedSports.Mobile.Core.Views"
     xmlns:viewModel="clr-namespace:StokedSports.Mobile.Core.ViewModels"
     BackgroundColor="{DynamicResource Gray-200}"
-    NavigationPage.HasNavigationBar="False">
+    NavigationPage.HasNavigationBar="False"
+    Title ="Stoked Sports">
 
     <ContentPage.Resources>
         <ResourceDictionary>

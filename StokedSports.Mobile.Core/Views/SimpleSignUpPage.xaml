@@ -11,7 +11,7 @@
     xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
     xmlns:local="clr-namespace:StokedSports.Mobile.Core.Views"
     xmlns:viewModel="clr-namespace:StokedSports.Mobile.Core.ViewModels"
-    Title="Sign Up"
+    Title="Stoked Sports"
     BackgroundColor="{DynamicResource Gray-200}"
     NavigationPage.HasNavigationBar="False">
 
