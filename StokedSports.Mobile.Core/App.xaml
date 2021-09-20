@@ -13,8 +13,8 @@
             </ResourceDictionary.MergedDictionaries >
             <Color x:Key="BackGroundColor">#f2b3b3</Color>
             <Color x:Key="FlyoutBackGroundColor">#f2b3b3</Color>
-            <Color x:Key="NavigationPrimary">#901c1c</Color>
-            <Color x:Key="FlyoutHeaderBackGroundColor">#4f1f1d</Color>
+            <Color x:Key="NavigationPrimary">#0000FF</Color>
+            <Color x:Key="FlyoutHeaderBackGroundColor">#0000FF</Color>
 
             <Style x:Key="ListItemTextStyle" TargetType="{x:Type Label}">
                 <Setter Property = "LineBreakMode" Value="NoWrap"/>
