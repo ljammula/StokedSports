@@ -143,7 +143,7 @@ namespace StokedSports.Mobile.Core.ViewModels
                     // we store the Id to know if the user is already logged in to the application
                     _settingsService.UserIdSetting = authenticationResponse.User.Id;
                     _settingsService.UserNameSetting = authenticationResponse.User.FirstName;
-                    
+                    await Shell.Current.DisplayAlert("Welcome back!", "", "Ok");
                     // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
                     await Shell.Current.GoToAsync("//About");
                 }

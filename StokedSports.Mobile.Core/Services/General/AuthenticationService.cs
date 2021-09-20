@@ -32,7 +32,7 @@ namespace StokedSports.Mobile.Core.Services.General
 
             AuthenticationRequest authenticationRequest = new AuthenticationRequest()
             {
-                UserName = userName,
+                Email = userName,
                 Password = password
             };
 
