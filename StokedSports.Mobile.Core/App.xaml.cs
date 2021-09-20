@@ -1,3 +1,4 @@
+using StokedSports.Mobile.Core.Bootstrap;
 using StokedSports.Mobile.Core.Services;
 using Xamarin.Forms;
 
@@ -17,9 +18,15 @@ namespace StokedSports.Mobile.Core
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDg4ODI3QDMxMzkyZTMyMmUzME1aaVFrM2NuQkx5aVJDRWpWcWxKdnlVeDdZeGJhay9IaEhnQVBrd0dQZ3M9");
 
             InitializeComponent();
+            InitializeApp();
 
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
+        }
+
+        private void InitializeApp()
+        {
+            DependencyService.Register<MockDataStore>();
+            AppContainer.RegisterDependencies();
         }
 
         protected override void OnStart()

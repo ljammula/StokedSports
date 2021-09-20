@@ -1,4 +1,5 @@
-﻿using StokedSports.Mobile.Core.Validators;
+﻿using StokedSports.Mobile.Core.Services.General;
+using StokedSports.Mobile.Core.Validators;
 using StokedSports.Mobile.Core.Validators.Rules;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -9,21 +10,35 @@ namespace StokedSports.Mobile.Core.ViewModels
     /// ViewModel for login page.
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class LoginPageViewModel : LoginViewModel
+    public class SimpleLoginPageModel : LoginViewModel
     {
         #region Fields
 
         private ValidatableObject<string> password;
+        private readonly IAuthenticationService _authenticationService;
+        private readonly ISettingsService _settingsService;
 
         #endregion
 
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance for the <see cref="LoginPageViewModel" /> class.
+        /// Initializes a new instance for the <see cref="SimpleLoginPageModel" /> class.
         /// </summary>
-        public LoginPageViewModel()
+        // public SimpleLoginPageViewModel()
+        // {
+        //     this.InitializeProperties();
+        //     this.AddValidationRules();
+        //     this.LoginCommand = new Command(this.LoginClicked);
+        //     this.SignUpCommand = new Command(this.SignUpClicked);
+        //     this.ForgotPasswordCommand = new Command(this.ForgotPasswordClicked);
+        //     this.SocialMediaLoginCommand = new Command(this.SocialLoggedIn);
+        // }
+
+        public SimpleLoginPageModel(IAuthenticationService authenticationService, ISettingsService settingsService)
         {
+            _authenticationService = authenticationService;
+            _settingsService = settingsService;
             this.InitializeProperties();
             this.AddValidationRules();
             this.LoginCommand = new Command(this.LoginClicked);
@@ -120,10 +135,19 @@ namespace StokedSports.Mobile.Core.ViewModels
         {
             if (this.AreFieldsValid())
             {
-                // Do Something
-                //TODO: Replace this with actual logic
-                // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-                await Shell.Current.GoToAsync("//About");
+                // Call Api for authentication
+                var authenticationResponse = await _authenticationService.Authenticate(Email.Value, Password.Value);
+
+                if (authenticationResponse.IsAuthenticated)
+                {
+                    // we store the Id to know if the user is already logged in to the application
+                    _settingsService.UserIdSetting = authenticationResponse.User.Id;
+                    _settingsService.UserNameSetting = authenticationResponse.User.FirstName;
+                    
+                    // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+                    await Shell.Current.GoToAsync("//About");
+                }
+
             }
         }
 
@@ -152,6 +176,7 @@ namespace StokedSports.Mobile.Core.ViewModels
         private void SocialLoggedIn(object obj)
         {
             // Do something
+
         }
 
         #endregion

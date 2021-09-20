@@ -22,13 +22,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="19.2.0.57" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="19.2.0.57" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="19.2.0.57" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.2.0.57" />
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="19.2.0.57" />
+    <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Polly" Version="5.9.0" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+    <PackageReference Include="Autofac" Version="4.6.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -119,5 +124,9 @@
     <EmbeddedResource Update="Views\SlotsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Data\" />
   </ItemGroup>
 </Project>
