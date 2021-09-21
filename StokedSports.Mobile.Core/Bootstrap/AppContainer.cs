@@ -15,13 +15,15 @@ namespace StokedSports.Mobile.Core.Bootstrap
             var builder = new ContainerBuilder();
 
             //ViewModels
-            builder.RegisterType<SimpleLoginPageModel>();
+            builder.RegisterType<SimpleLoginPageViewModel>();
+            builder.RegisterType<SimpleSignUpPageViewModel>();
 
             //services - data
 
             //services - general
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>();
             builder.RegisterType<SettingsService>().As<ISettingsService>().SingleInstance();
+            builder.RegisterType<DialogService>().As<IDialogService>().SingleInstance();
 
             //General
             builder.RegisterType<GenericRepository>().As<IGenericRepository>();

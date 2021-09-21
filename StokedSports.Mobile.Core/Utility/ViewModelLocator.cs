@@ -35,7 +35,7 @@ namespace StokedSports.Mobile.Core.Utility
             {
                 var viewName = viewType.FullName.Replace(".Views.", ".ViewModels.");
                 var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
-                var viewModelName = string.Format(CultureInfo.InvariantCulture, "{0}Model, {1}", viewName, viewAssemblyName);
+                var viewModelName = string.Format(CultureInfo.InvariantCulture, "{0}ViewModel, {1}", viewName, viewAssemblyName);
 
                 var viewModelType = Type.GetType(viewModelName);
                 if (viewModelType == null)

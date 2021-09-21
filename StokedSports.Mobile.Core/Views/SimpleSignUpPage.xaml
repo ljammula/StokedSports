@@ -10,7 +10,8 @@
     xmlns:converter="clr-namespace:StokedSports.Mobile.Core.Converters"
     xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
     xmlns:local="clr-namespace:StokedSports.Mobile.Core.Views"
-    xmlns:viewModel="clr-namespace:StokedSports.Mobile.Core.ViewModels"
+    xmlns:utility="clr-namespace:StokedSports.Mobile.Core.Utility;assembly=StokedSports.Mobile.Core"
+    utility:ViewModelLocator.AutoWireViewModel="True"
     Title="Stoked Sports"
     BackgroundColor="{DynamicResource Gray-200}"
     NavigationPage.HasNavigationBar="False">
@@ -22,11 +23,6 @@
             <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-
-    <!--  Binding context for sign-up page  -->
-    <ContentPage.BindingContext>
-        <viewModel:SignUpPageViewModel />
-    </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <Grid>
@@ -79,11 +75,11 @@
                                         x:Name="NameEntry"
                                         Margin="15,0"
                                         HeightRequest="40"
-                                        Placeholder="Name"
+                                        Placeholder="UserName"
                                         Style="{StaticResource BorderlessEntryStyle}"
-                                        Text="{Binding Name.Value}">
+                                        Text="{Binding UserName.Value}">
                                         <Entry.Behaviors>
-                                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Name.IsValid}" />
+                                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding UserName.IsValid}" />
                                         </Entry.Behaviors>
                                     </control:BorderlessEntry>
 
@@ -100,9 +96,9 @@
                             <Label
                                 x:Name="NameValidationLabel"
                                 Margin="15,-3,0,0"
-                                IsVisible="{Binding Name.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                IsVisible="{Binding UserName.IsValid, Converter={StaticResource InverseBoolConverter}}"
                                 Style="{StaticResource SimpleLabelStyle}"
-                                Text="{Binding Name.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                Text="{Binding UserName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                                 TextColor="{DynamicResource Red}"
                                 VerticalOptions="FillAndExpand" />
                         </StackLayout>

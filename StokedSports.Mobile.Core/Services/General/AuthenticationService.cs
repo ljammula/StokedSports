@@ -18,6 +18,23 @@ namespace StokedSports.Mobile.Core.Services.General
             _genericRepository = genericRepository;
         }
 
+        public async Task<AuthenticationResponse> Register(string userName, string email, string password)
+        {
+            UriBuilder builder = new UriBuilder(ApiConstants.BaseApiUrl)
+            {
+                Path = ApiConstants.RegisterEndpoint
+            };
+
+            AuthenticationRequest authenticationRequest = new AuthenticationRequest()
+            {
+                UserName = userName,
+                Email = email,
+                Password = password
+            };
+
+            return await _genericRepository.PostAsync<AuthenticationRequest, AuthenticationResponse>(builder.ToString(), authenticationRequest);
+        }
+
         public bool IsUserAuthenticated()
         {
             return !string.IsNullOrEmpty(_settingsService.UserIdSetting);

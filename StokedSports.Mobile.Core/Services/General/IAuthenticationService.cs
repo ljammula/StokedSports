@@ -7,6 +7,8 @@ namespace StokedSports.Mobile.Core.Services.General
     {
         Task<AuthenticationResponse> Authenticate(string userName, string password);
 
+        Task<AuthenticationResponse> Register(string username, string email, string password);
+
         bool IsUserAuthenticated();
     }
 }

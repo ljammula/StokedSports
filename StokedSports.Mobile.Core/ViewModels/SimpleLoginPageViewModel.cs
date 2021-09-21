@@ -10,7 +10,7 @@ namespace StokedSports.Mobile.Core.ViewModels
     /// ViewModel for login page.
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class SimpleLoginPageModel : LoginViewModel
+    public class SimpleLoginPageViewModel : LoginViewModel
     {
         #region Fields
 
@@ -22,20 +22,7 @@ namespace StokedSports.Mobile.Core.ViewModels
 
         #region Constructor
 
-        /// <summary>
-        /// Initializes a new instance for the <see cref="SimpleLoginPageModel" /> class.
-        /// </summary>
-        // public SimpleLoginPageViewModel()
-        // {
-        //     this.InitializeProperties();
-        //     this.AddValidationRules();
-        //     this.LoginCommand = new Command(this.LoginClicked);
-        //     this.SignUpCommand = new Command(this.SignUpClicked);
-        //     this.ForgotPasswordCommand = new Command(this.ForgotPasswordClicked);
-        //     this.SocialMediaLoginCommand = new Command(this.SocialLoggedIn);
-        // }
-
-        public SimpleLoginPageModel(IAuthenticationService authenticationService, ISettingsService settingsService)
+        public SimpleLoginPageViewModel(IAuthenticationService authenticationService, ISettingsService settingsService)
         {
             _authenticationService = authenticationService;
             _settingsService = settingsService;
@@ -143,7 +130,7 @@ namespace StokedSports.Mobile.Core.ViewModels
                     // we store the Id to know if the user is already logged in to the application
                     _settingsService.UserIdSetting = authenticationResponse.User.Id;
                     _settingsService.UserNameSetting = authenticationResponse.User.FirstName;
-                    await Shell.Current.DisplayAlert("Welcome back!", "", "Ok");
+                    await Shell.Current.DisplayAlert("Welcome back!", "Message", "OK");
                     // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
                     await Shell.Current.GoToAsync("//About");
                 }
