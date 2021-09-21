@@ -41,9 +41,6 @@
     <Compile Update="Views\LocationsPage.xaml.cs">
       <DependentUpon>LocationsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\DefaultLoginPage.xaml.cs">
-      <DependentUpon>DefaultLoginPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\SlotsPage.xaml.cs">
       <DependentUpon>SlotsPage.xaml</DependentUpon>
     </Compile>
