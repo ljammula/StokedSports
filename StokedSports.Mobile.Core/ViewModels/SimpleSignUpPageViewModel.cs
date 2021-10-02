@@ -1,4 +1,7 @@
-﻿using StokedSports.Mobile.Core.Services.General;
+﻿using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using StokedSports.Mobile.Core.Services.General;
 using StokedSports.Mobile.Core.Validators;
 using StokedSports.Mobile.Core.Validators.Rules;
 using Xamarin.Forms;
@@ -136,9 +139,9 @@ namespace StokedSports.Mobile.Core.ViewModels
         /// Invoked when the Log in button is clicked.
         /// </summary>
         /// <param userName="obj">The Object</param>
-        private void LoginClicked(object obj)
+        private async void LoginClicked(object obj)
         {
-            // Do something
+            await Shell.Current.GoToAsync("//LoginPage");
         }
 
         /// <summary>
@@ -147,16 +150,33 @@ namespace StokedSports.Mobile.Core.ViewModels
         /// <param userName="obj">The Object</param>
         private async void SignUpClicked(object obj)
         {
-            if (this.AreFieldsValid())
+            try
             {
-                var userRegistered = await _authenticationService.Register(UserName.Value, Email.Value, Password.Item1.Value);
-                if (userRegistered.IsAuthenticated)
+                if (this.AreFieldsValid())
                 {
-                    await Shell.Current.DisplayAlert("Registration successful", "Message", "OK");
-                    _settingsService.UserIdSetting = userRegistered.User.Id;
-                    // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-                    await Shell.Current.GoToAsync("//LoginPage");
+                    //Display ActivityIndicator while processing
+                    IsBusy = true;
+
+                    var userRegistered =
+                        await _authenticationService.Register(UserName.Value, Email.Value, Password.Item1.Value);
+                    if (userRegistered.IsAuthenticated)
+                    {
+                        await Shell.Current.DisplayAlert("Registration successful", "Message", "OK");
+                        _settingsService.UserIdSetting = userRegistered.User.Id;
+                        // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+                        await Shell.Current.GoToAsync("//LoginPage");
+                    }
                 }
+            }
+            catch (Exception e) //TODO: Move this to global exception handling
+            {
+                var message = $"Error occurred during Signup: {e.Message} :: {e}";
+                Debug.Write(message);
+                await Shell.Current.DisplayAlert("Oops an error occurred during Signup, please try again!", "Message", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 

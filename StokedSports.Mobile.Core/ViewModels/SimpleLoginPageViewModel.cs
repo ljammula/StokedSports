@@ -1,4 +1,7 @@
-﻿using StokedSports.Mobile.Core.Services.General;
+﻿using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using StokedSports.Mobile.Core.Services.General;
 using StokedSports.Mobile.Core.Validators;
 using StokedSports.Mobile.Core.Validators.Rules;
 using Xamarin.Forms;
@@ -122,19 +125,34 @@ namespace StokedSports.Mobile.Core.ViewModels
         {
             if (this.AreFieldsValid())
             {
-                // Call Api for authentication
-                var authenticationResponse = await _authenticationService.Authenticate(Email.Value, Password.Value);
-
-                if (authenticationResponse.IsAuthenticated)
+                try
                 {
-                    // we store the Id to know if the user is already logged in to the application
-                    _settingsService.UserIdSetting = authenticationResponse.User.Id;
-                    _settingsService.UserNameSetting = authenticationResponse.User.FirstName;
-                    await Shell.Current.DisplayAlert("Welcome back!", "Message", "OK");
-                    // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-                    await Shell.Current.GoToAsync("//About");
-                }
+                    //Display ActivityIndicator while processing
+                    IsBusy = true;
 
+                    // Call Api for authentication
+                    var authenticationResponse = await _authenticationService.Authenticate(Email.Value, Password.Value);
+
+                    if (authenticationResponse.IsAuthenticated)
+                    {
+                        // we store the Id to know if the user is already logged in to the application
+                        _settingsService.UserIdSetting = authenticationResponse.User.Id;
+                        _settingsService.UserNameSetting = authenticationResponse.User.FirstName;
+                        await Shell.Current.DisplayAlert("Welcome back!", "Message", "OK");
+                        // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+                        await Shell.Current.GoToAsync("//About");
+                    }
+                }
+                catch (Exception e) //TODO: Move this to global exception handling
+                {
+                    var message = $"Error occurred during Login: {e.Message} :: {e}";
+                    Debug.Write(message);
+                    await Shell.Current.DisplayAlert("Oops an error occurred during login, please try again!", "Message", "OK");
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
             }
         }
 
@@ -142,9 +160,9 @@ namespace StokedSports.Mobile.Core.ViewModels
         /// Invoked when the Sign Up button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void SignUpClicked(object obj)
+        private async void SignUpClicked(object obj)
         {
-            // Do Something
+            await Shell.Current.GoToAsync("//SignUpPage");
         }
 
         /// <summary>

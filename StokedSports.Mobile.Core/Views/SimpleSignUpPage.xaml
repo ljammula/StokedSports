@@ -188,6 +188,27 @@
                                 VerticalOptions="FillAndExpand" />
                         </StackLayout>
 
+                        <!-- ActivityIndicator to display processing icon-->
+                        <Frame Padding="10"
+                               CornerRadius="35"
+                               Margin="10"
+                               Opacity="0.8"
+                               IsVisible="{Binding IsBusy}"
+                               BackgroundColor="{StaticResource Gray-White}"
+                               x:Name="ActivIndicator"
+                               VerticalOptions="StartAndExpand"
+                               HorizontalOptions="CenterAndExpand">
+                            <ActivityIndicator x:Name="ActInd"
+                                               HeightRequest="50"
+                                               WidthRequest="50"
+                                               IsRunning="True"
+                                               IsVisible="True"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="CenterAndExpand"
+                                               BackgroundColor="{StaticResource Gray-White}"
+                                               Color="{StaticResource NavigationPrimary}"/>
+                        </Frame>
+
                         <!--  Sign-up button  -->
                         <buttons:SfButton
                             Command="{Binding SignUpCommand}"
