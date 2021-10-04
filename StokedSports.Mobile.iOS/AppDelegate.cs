@@ -42,7 +42,17 @@ namespace StokedSports.Mobile.iOS
             SfButtonRenderer.Init();
             LoadApplication(new App());
 
+            global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
+
             return base.FinishedLaunching(app, options);
+        }
+
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            if (Xamarin.Essentials.Platform.OpenUrl(app, url, options))
+                return true;
+
+            return base.OpenUrl(app, url, options);
         }
     }
 }

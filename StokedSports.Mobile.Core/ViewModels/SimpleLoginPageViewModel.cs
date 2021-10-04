@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
+using System.IO;
+using System.Net.Http;
+using Newtonsoft.Json;
+using StokedSports.Mobile.Core.Constants;
+using StokedSports.Mobile.Core.Models;
 using StokedSports.Mobile.Core.Services.General;
 using StokedSports.Mobile.Core.Validators;
 using StokedSports.Mobile.Core.Validators.Rules;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -20,6 +25,9 @@ namespace StokedSports.Mobile.Core.ViewModels
         private ValidatableObject<string> password;
         private readonly IAuthenticationService _authenticationService;
         private readonly ISettingsService _settingsService;
+        private string _authToken;
+
+        private readonly JsonSerializer _serializer = new JsonSerializer();
 
         #endregion
 
@@ -59,6 +67,19 @@ namespace StokedSports.Mobile.Core.ViewModels
                 }
 
                 this.SetProperty(ref this.password, value);
+            }
+        }
+
+        public string AuthToken
+        {
+            get => _authToken;
+            set
+            {
+                if (value == _authToken)
+                {
+                    return;
+                }
+                this.SetProperty(ref this._authToken, value);
             }
         }
 
@@ -178,12 +199,53 @@ namespace StokedSports.Mobile.Core.ViewModels
         /// Invoked when social media login button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void SocialLoggedIn(object obj)
+        private async void SocialLoggedIn(object obj)
         {
-            // Do something
+            string scheme = "Google";
 
+            try
+            {
+                WebAuthenticatorResult r = null;
+
+                if (scheme.Equals("Google"))
+                {
+                    var authUrl = new Uri(ApiConstants.GoogleAuthEndPointUri + scheme);
+                    var callbackUrl = new Uri("xamarinessentials://");
+
+                    r = await WebAuthenticator.AuthenticateAsync(authUrl, callbackUrl);
+                }
+
+                AuthToken = r?.AccessToken ?? r?.IdToken;
+                GetUserInfoUsingToken(AuthToken);
+
+                await Shell.Current.DisplayAlert("Welcome back!", "Message", "OK");
+                // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+                await Shell.Current.GoToAsync("//About");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception in google Auth: ", ex);
+                AuthToken = string.Empty;
+                await Shell.Current.DisplayAlert("Oops an error occurred during login, please try again!", "Message", "OK");
+            }
         }
 
+        private async void GetUserInfoUsingToken(string authToken)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri("https://www.googleapis.com/oauth2/v3/");
+            var httpResponseMessage = await httpClient.GetAsync("tokeninfo?access_token=" + authToken);
+            using (var stream = await httpResponseMessage.Content.ReadAsStreamAsync())
+            using (var reader = new StreamReader(stream))
+            using (var json = new JsonTextReader(reader))
+            {
+                var jsoncontent = _serializer.Deserialize<GoogleAuthClass>(json);
+                Preferences.Set("UserToken", authToken);
+                //TODO: use this email else where
+                Debug.WriteLine($"Logged in email: {jsoncontent.email}");
+            }
+        }
         #endregion
+
     }
 }
