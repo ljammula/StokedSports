@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
+using StokedSports.Mobile.Core.Constants;
 using StokedSports.Mobile.Core.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace StokedSports.Mobile.Core
@@ -16,6 +19,16 @@ namespace StokedSports.Mobile.Core
         private async void OnLogoutClicked(object sender, EventArgs e)
         {
             FlyoutIsPresented = false;
+
+            try
+            {
+                //TODO: add logout code
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception in google Auth Logout: ", ex);
+            }
+
             await DisplayAlert("Logout", "Successfully Logout!", "Ok");
             await Shell.Current.GoToAsync("//LoginPage");
         }
